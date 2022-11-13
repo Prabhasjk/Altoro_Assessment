@@ -29,10 +29,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -58,14 +61,22 @@ public class Selenium_BaseClass implements Selenium_BaseMethods {
 			case "chrome":
 				
 				WebDriverManager.chromedriver().setup();
-				driver = new ChromeDriver();
+				
+				DesiredCapabilities cap = new DesiredCapabilities();
+				cap.setAcceptInsecureCerts(true);	
+				ChromeOptions options = new ChromeOptions();
+				options.merge(cap);
+				driver = new ChromeDriver(options);
 				break;
 			case "firefox":
 				WebDriverManager.firefoxdriver().setup();
 				driver= new FirefoxDriver();
+				break;
 			case "edge":
 				WebDriverManager.edgedriver().setup();
-				driver = new EdgeDriver();
+				EdgeOptions edgeOptions = new EdgeOptions();
+				edgeOptions.setAcceptInsecureCerts(true);
+				driver = new EdgeDriver(edgeOptions);
 			default:
 				System.err.println("Undefined Driver Name Please Check it");
 				break;

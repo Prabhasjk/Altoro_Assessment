@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 public class AltoroMutualPage {
 
 
-	public AltoroMutualPage(WebDriver driver) {
+	public AltoroMutualPage(WebDriver driver) { // constructor
 		PageFactory.initElements(driver, this);
 	}
 
